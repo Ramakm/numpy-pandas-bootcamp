@@ -20,3 +20,15 @@ print(a)
 
 a = np.full_like(a,4)
 print(a)
+
+#Array of random dacimal numbers
+
+a = np.random.rand(4,2)
+print(a)
+
+#Array of random integer number
+
+a = np.random.randint(6, size=(3,3))
+print(a)
+
+
