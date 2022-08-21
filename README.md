@@ -1,4 +1,3 @@
-
 l = [4,5,6,2,41,2,5]
 
 
@@ -465,14 +464,22 @@ Python to make border 1's and Inside elements 0's
 
 import numpy as np
 
-n = int(input("Enter the size of n: "))
-    
+n = int(input()) 
+
 border_array = np.ones((n,n), dtype = int)  #Making all elements in the ND array as 1's
 
-border_array[1:-1, 1:-1] = 0 #making inside elements other than border as 0's
+
+border_array[1:-1, 1:-1] = 0   #Making inside elements other than border as 0's
+
+#first 1:-1 means start from row 1 and don't consider last row
+
+#second 1:-1 means start from 1st column and don't consider last column.
+
+#that means we are ignoring all the borders and making inside values 0's
+
 
 print(border_array)
-Enter the size of n: 4
+4
 [[1 1 1 1]
  [1 0 0 1]
  [1 0 0 1]
@@ -571,7 +578,320 @@ nba.iloc[200:205] [['Name', 'Position', 'College']]
 #Cols will be Name, Position and College
 
 #Rows indexes will be 200,201,202,203,204
+s = "BWWBB"
 
 
+list1 =list( filter(lambda x : x == "B", s))
 
+list1
+len(list1)
 
+s[0] = "B"
+
+s
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-13-04539e1e0888> in <module>
+      7 len(list1)
+      8 
+----> 9 s[0] = "B"
+     10 
+     11 s
+
+TypeError: 'str' object does not support item assignment
+import numpy as np
+
+n = int(input())
+
+data = np.zeros([n,n], dtype=int) # fill grid of nxn with zeros.
+data[0] = data[n-1] = np.ones(n, dtype=int) # set first and last row to 1s.
+
+j = n-2
+for i in range(1,n-1): # fills diagonally 1s.
+    data[i][j] = 1
+    j-=1
+
+print(data)
+3
+[[1 1 1]
+ [0 1 0]
+ [1 1 1]]
+Operations On Numpy
+Arithmatic Operations
+import numpy as np
+
+array1 = np.array([10,20,30,40,50])
+array2 = np.arange(5)
+array1
+array([10, 20, 30, 40, 50, 60])
+array2
+array([0, 1, 2, 3, 4])
+array3 = array1 + array2
+array3
+array([10, 21, 32, 43, 54])
+array = np.linspace(1,10,5)
+
+array
+array([ 1.  ,  3.25,  5.5 ,  7.75, 10.  ])
+array *2
+array([ 2. ,  6.5, 11. , 15.5, 20. ])
+array **2
+array([  1.    ,  10.5625,  30.25  ,  60.0625, 100.    ])
+Stacking an Array
+np.hstack() and np.vstack()
+For hstack(): Horizontal stacking, no of rows should be same.
+for vstack(): Vertical stacking, no of column should be same.
+a = np.array([1,2,3])
+b = np.array([4,5,6])
+
+np.hstack((a,b))
+array([1, 2, 3, 4, 5, 6])
+np.vstack((a,b))
+array([[1, 2, 3],
+       [4, 5, 6]])
+np.arange(12)
+array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11])
+array1 = np.arange(12).reshape(3,4)
+
+array2 = np.arange(20).reshape(5,4)
+array1
+array([[ 0,  1,  2,  3],
+       [ 4,  5,  6,  7],
+       [ 8,  9, 10, 11]])
+array2
+array([[ 0,  1,  2,  3],
+       [ 4,  5,  6,  7],
+       [ 8,  9, 10, 11],
+       [12, 13, 14, 15],
+       [16, 17, 18, 19]])
+print(array1, "\n", "\n", array2)
+[[ 0  1  2  3]
+ [ 4  5  6  7]
+ [ 8  9 10 11]] 
+ 
+ [[ 0  1  2  3]
+ [ 4  5  6  7]
+ [ 8  9 10 11]
+ [12 13 14 15]
+ [16 17 18 19]]
+np.vstack((array1,array2))
+array([[ 0,  1,  2,  3],
+       [ 4,  5,  6,  7],
+       [ 8,  9, 10, 11],
+       [ 0,  1,  2,  3],
+       [ 4,  5,  6,  7],
+       [ 8,  9, 10, 11],
+       [12, 13, 14, 15],
+       [16, 17, 18, 19]])
+m = np.arange(11)
+
+n = np.arange(12)
+
+m
+array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10])
+array = np.array(range(1, 11*12+1))
+
+array.reshape(11,12)
+
+np.unravel_index(99, (11,12))
+(8, 3)
+import numpy as np
+l = [[1, 5],
+ [3, 7],
+ [4, 9]]
+
+p = np.array(l)
+np.reshape(p,-1)
+
+# reshape() function returns a 1-D array when you specify the shape as -1.
+array([1, 5, 3, 7, 4, 9])
+np.reshape(p, (1, -1))
+
+# The dimension of the array is specified by the number of elements you specify in the tuple. Here, the answer is 2-D array.
+array([[1, 5, 3, 7, 4, 9]])
+array1 = np.array ([[1, 2, 3, 4, 5],[6, 7, 8, 9, 10],[11, 12, 13, 14, 15],[16, 17, 18, 19, 20]])
+
+array1
+array([[ 1,  2,  3,  4,  5],
+       [ 6,  7,  8,  9, 10],
+       [11, 12, 13, 14, 15],
+       [16, 17, 18, 19, 20]])
+print(array1[array1%2 != 0])
+[ 1  3  5  7  9 11 13 15 17 19]
+print(array1.reshape(5, 4)[array1%2 != 0])
+---------------------------------------------------------------------------
+IndexError                                Traceback (most recent call last)
+<ipython-input-51-f316d6ca346e> in <module>
+----> 1 print(array1.reshape(5, 4)[array1%2 != 0])
+
+IndexError: boolean index did not match indexed array along dimension 0; dimension is 5 but corresponding boolean dimension is 4
+print(array1[array1%2 == 0].reshape(5, 2))
+[[ 2  4]
+ [ 6  8]
+ [10 12]
+ [14 16]
+ [18 20]]
+print(array1[array1%2 != 0].reshape(5, 2))
+[[ 1  3]
+ [ 5  7]
+ [ 9 11]
+ [13 15]
+ [17 19]]
+NUMPY BUILD-IN FUNCTION
+array1
+array([[ 1,  2,  3,  4,  5],
+       [ 6,  7,  8,  9, 10],
+       [11, 12, 13, 14, 15],
+       [16, 17, 18, 19, 20]])
+np.power(array1, 3)
+array([[   1,    8,   27,   64,  125],
+       [ 216,  343,  512,  729, 1000],
+       [1331, 1728, 2197, 2744, 3375],
+       [4096, 4913, 5832, 6859, 8000]])
+np.arange(9).reshape(3,3)
+array([[0, 1, 2],
+       [3, 4, 5],
+       [6, 7, 8]])
+x = np.array([-2,-1,0,1,2])
+x
+array([-2, -1,  0,  1,  2])
+abs(x)  #makes integer values to its absolute values
+array([2, 1, 0, 1, 2])
+np.absolute(x)
+array([2, 1, 0, 1, 2])
+TRIGONOMETRIC FUNCTION
+np.pi
+3.141592653589793
+theta = np.linspace(0,np.pi,5)
+
+theta
+array([0.        , 0.78539816, 1.57079633, 2.35619449, 3.14159265])
+np.sin(theta)
+array([0.00000000e+00, 7.07106781e-01, 1.00000000e+00, 7.07106781e-01,
+       1.22464680e-16])
+np.cos(theta)
+array([ 1.00000000e+00,  7.07106781e-01,  6.12323400e-17, -7.07106781e-01,
+       -1.00000000e+00])
+np.tan(theta)
+array([ 0.00000000e+00,  1.00000000e+00,  1.63312394e+16, -1.00000000e+00,
+       -1.22464680e-16])
+Exponential and Logarithmic Functions
+import numpy as np
+
+x =[1,2,3,10]
+x = np.array(x)
+
+np.exp(x)  #exp = 2.718
+array([2.71828183e+00, 7.38905610e+00, 2.00855369e+01, 2.20264658e+04])
+# 2^1, 2^2, 2^3 .......
+
+np.exp2(x)
+array([   2.,    4.,    8., 1024.])
+np.power(x,3)
+array([   1,    8,   27, 1000])
+np.log(x)
+array([0.        , 0.69314718, 1.09861229, 2.30258509])
+np.log2(x)
+array([0.        , 1.        , 1.5849625 , 3.32192809])
+np.log10(x)
+array([0.        , 0.30103   , 0.47712125, 1.        ])
+np.log1p(x)
+array([0.69314718, 1.09861229, 1.38629436, 2.39789527])
+x = np.arange(5)
+x
+array([0, 1, 2, 3, 4])
+y = x*10
+y
+array([ 0, 10, 20, 30, 40])
+y = np.empty(5)
+y
+array([1.52302257e-316, 0.00000000e+000, 0.00000000e+000, 0.00000000e+000,
+       0.00000000e+000])
+np.multiply(x,10,out = y)
+array([ 0, 10, 20, 30, 40])
+y
+array([ 0, 10, 20, 30, 40])
+z = np.zeros(10)
+z
+array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0.])
+np.power(2,x, out =y)
+array([ 1,  2,  4,  8, 16])
+abs(y)
+array([ 1,  2,  4,  8, 16])
+AGGREGATES
+x = np.arange(1,6)
+x
+array([1, 2, 3, 4, 5])
+np.add.reduce(x)
+15
+sum(x)
+15
+np.add.accumulate(x)
+array([ 1,  3,  6, 10, 15])
+np.multiply.accumulate(x)
+array([  1,   2,   6,  24, 120])
+APPLY BASIC LINEAR ALGEBRA OPERATIONS
+Numpy provides np.linalg package to apply common linear algebra operations such as :
+np.linalg.inv : Inverse Matrix
+np.linalg.det : Determinant of a matrix
+np.linalg.eig : Eigen values of a matrix
+A = np.array([[6,1,1],
+              [4,-2,5],
+              [2,8,7]])
+
+A
+array([[ 6,  1,  1],
+       [ 4, -2,  5],
+       [ 2,  8,  7]])
+#RANK OF A MATRIX
+np.linalg.matrix_rank(A)
+3
+#TRACE OF A MATRIX
+np.trace(A)
+11
+#DETERMINANT of a Matrix
+np.linalg.det(A)
+-306.0
+#INVERSE of a MAtrix
+np.linalg.inv(A)
+array([[ 0.17647059, -0.00326797, -0.02287582],
+       [ 0.05882353, -0.13071895,  0.08496732],
+       [-0.11764706,  0.1503268 ,  0.05228758]])
+B = np.linalg.inv(A)
+#MATRIX MULTIPLICATION
+
+np.matmul(A,B)
+array([[ 1.00000000e+00,  0.00000000e+00,  2.77555756e-17],
+       [-1.38777878e-17,  1.00000000e+00,  1.38777878e-17],
+       [-4.16333634e-17,  1.38777878e-16,  1.00000000e+00]])
+A * B # This is different than Matrix multiplication
+array([[ 1.05882353, -0.00326797, -0.02287582],
+       [ 0.23529412,  0.26143791,  0.4248366 ],
+       [-0.23529412,  1.20261438,  0.36601307]])
+Compare time required between Numpy and Normal Python List
+import time 
+
+## Comparing time taken for computation
+list_1 = [i for i in range(1000000)]
+list_2 = [j**2 for j in range(1000000)]
+
+t0 = time.time()
+product_list = list(map(lambda x, y: x*y, list_1, list_2))
+t1 = time.time()
+list_time = t1 - t0
+print (t1-t0)
+
+# numpy array 
+array_1 = np.array(list_1)
+array_2 = np.array(list_2)
+
+t0 = time.time()
+product_numpy = array_1 * array_2
+t1 = time.time()
+numpy_time = t1 - t0
+print (t1-t0)
+
+print("The ratio of time taken is {}".format(list_time//numpy_time))
+0.15363264083862305
+0.003894805908203125
+The ratio of time taken is 39.0
